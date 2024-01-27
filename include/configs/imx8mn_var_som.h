@@ -121,9 +121,9 @@
 		"bootaux ${m7_addr};\0" \
 	"optargs=setenv bootargs ${bootargs} ${kernelargs};\0" \
 	"mmcargs=setenv bootargs ${mcore_clk} console=${console} " \
-		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size} cma_name=linux,cma\0 " \
+		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait ${rauc_slot} rw ${cma_size} cma_name=linux,cma\0 " \
 	"bootscript_part=2\0" \
-	"loadbootscript=load mmc ${mmcdev}:${bootscript_part} ${loadaddr} ${bootdir}/${bsp_script};\0" \
+	"loadbootscript=load mmc ${mmcdev}:${bootscript_part} ${loadaddr} ${bsp_script};\0" \
 	"bootscript=echo Running bootscript from mmc ...; " \
 		"source\0" \
 	"loadimage=load mmc ${mmcdev}:${mmcpart} ${img_addr} ${bootdir}/${image};" \
@@ -161,6 +161,7 @@
 				"run bootscript; " \
 			"else "\
 				"echo No bootscript found, booting from mmc...; " \
+				"setenv rauc_slot;" \
 			"fi; "\
 			"for part in 3 4 1; do " \
 				"echo trying to boot from partition ${part}...; " \
