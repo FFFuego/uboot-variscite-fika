@@ -19,6 +19,9 @@ obj-$(CONFIG_DWC_ETH_QOS) += mac.o
 obj-$(CONFIG_SYS_I2C_MXC) += i2c-mxv7.o
 obj-$(CONFIG_IMX_HAB) += hab.o
 obj-y += cpu.o
+ifeq ($(CONFIG_ENV_FAT_INTERFACE),"mmc")
+obj-$(CONFIG_MMC) += mmc_env.o
+endif
 endif
 
 ifeq ($(SOC),$(filter $(SOC),mx5 mx6))
@@ -38,6 +41,9 @@ ifeq ($(SOC),$(filter $(SOC),mx7))
 obj-y	+= cpu.o
 obj-$(CONFIG_SYS_I2C_MXC) += i2c-mxv7.o
 obj-$(CONFIG_ENV_IS_IN_MMC) += mmc_env.o
+ifeq ($(CONFIG_ENV_FAT_INTERFACE),"mmc")
+obj-$(CONFIG_MMC) += mmc_env.o
+endif
 endif
 ifeq ($(SOC),$(filter $(SOC),mx7 imx8m))
 ifneq ($(CONFIG_SPL_BUILD),y)
