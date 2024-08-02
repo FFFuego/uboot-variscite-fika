@@ -155,7 +155,7 @@
 		"fi;\0" \
 	"bsp_bootcmd=echo Running BSP bootcmd ...; " \
 		"run ramsize_check; " \
-		"mmc dev ${mmcdev}; " \
+		"if mmc dev $mmcdev; then; else if mmc dev 2; then setenv mmcdev 2; fi; fi; " \
 		"if mmc rescan; then " \
 			"if run loadbootscript; then " \
 				"run bootscript; " \
