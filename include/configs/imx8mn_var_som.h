@@ -99,7 +99,6 @@
 	"bootm_size=0x10000000\0" \
 	"initrd_addr=0x43800000\0" \
 	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
-	"mmcblk=1\0" \
 	"mmcautodetect=yes\0" \
 	"mmcpart=1\0" \
 	"m7_addr=0x7e0000\0" \
@@ -121,7 +120,7 @@
 		"bootaux ${m7_addr};\0" \
 	"optargs=setenv bootargs ${bootargs} ${kernelargs};\0" \
 	"mmcargs=setenv bootargs ${mcore_clk} console=${console} " \
-		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait ${rauc_slot} rw ${cma_size} cma_name=linux,cma\0 " \
+		"root=/dev/mmcblk${mmcdev}p${mmcpart} rootwait ${rauc_slot} rw ${cma_size} cma_name=linux,cma\0 " \
 	"bootscript_part=2\0" \
 	"loadbootscript=load mmc ${mmcdev}:${bootscript_part} ${loadaddr} ${bsp_script};\0" \
 	"bootscript=echo Running bootscript from mmc ...; " \
