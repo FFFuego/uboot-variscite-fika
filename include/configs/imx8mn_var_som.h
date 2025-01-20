@@ -156,6 +156,16 @@
 		"run ramsize_check; " \
 		"if mmc dev $mmcdev; then; else if mmc dev 2; then setenv mmcdev 2; fi; fi; " \
 		"if mmc rescan; then " \
+			"echo Testing fastboot ...; " \
+			"if gpio read recovery_pin 154; then " \
+				"if test $recovery_pin = 0;" \
+					"then "\
+					"echo Not going into recovery" \
+				"else " \
+					"echo Recovery button pressed. Dropping into fastboot;" \
+					"fastboot usb 1;" \
+				"fi;" \
+			"fi;" \
 			"if run loadbootscript; then " \
 				"run bootscript; " \
 			"else "\
